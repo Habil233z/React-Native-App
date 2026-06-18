@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, Octicons, FontAwesome } from "@expo/vector-icons";
 
+import LoginScreen from "./src/screens/LoginScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import AnalyticsScreen from "./src/screens/AnalyticsScreen";
 import ActivityScreen from "./src/screens/ActivityScreen";
@@ -10,8 +11,8 @@ import ProfileScreen from "./src/screens/ProfileScreen";
 import { View } from "react-native";
 
 export type RootStackParamList = {
+  LoginScreen: undefined
   MainApp: undefined
-  Detail: {id: number, name: string}
 }
 
 export type RootTabParamList = {
@@ -70,7 +71,8 @@ function BottomTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MainApp">
+      <Stack.Navigator initialRouteName="LoginScreen">
+        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
         <Stack.Screen name="MainApp" component={BottomTabs} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
