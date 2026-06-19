@@ -20,10 +20,10 @@ export type RootStackParamList = {
 }
 
 export type RootTabParamList = {
-  HomeTab: undefined
-  AnalyticsTab: undefined
-  ActivityTab: undefined
-  ProfileTab: undefined
+  Home: undefined
+  Analytics: undefined
+  Activity: undefined
+  Profile: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -37,13 +37,13 @@ function BottomTabs() {
         let IoniconsIcon: keyof typeof Ionicons.glyphMap
         let OcticonsIcon: keyof typeof Octicons.glyphMap 
         let FontAwesomeIcon: keyof typeof FontAwesome.glyphMap
-        if (route.name === "HomeTab") {
+        if (route.name === "Home") {
           IoniconsIcon = focused? "home" : "home-outline"
-        } else if (route.name === "AnalyticsTab") {
+        } else if (route.name === "Analytics") {
           IoniconsIcon = focused? "stats-chart" : "stats-chart-outline"
-        } else if (route.name === "ActivityTab") {
+        } else if (route.name === "Activity") {
           OcticonsIcon = focused ? "bell-fill" : "bell"
-        } else if (route.name === "ProfileTab") {
+        } else if (route.name === "Profile") {
           FontAwesomeIcon = focused ? "user-circle-o" : "user-circle"
         }
 
@@ -64,10 +64,10 @@ function BottomTabs() {
       tabBarInactiveTintColor: "gray"
     })}
     >
-      <Tab.Screen name="HomeTab" component={HomeScreen} options={{title: "Home", headerStyle: {backgroundColor: "#0055DA", borderBottomWidth: 2, borderBlockColor: "grey"}}}/>
-      <Tab.Screen name="AnalyticsTab" component={AnalyticsScreen} options={{title: "Analytics", headerStyle: {backgroundColor: "#0055DA", borderBottomWidth: 2, borderBlockColor: "grey"}}}/>
-      <Tab.Screen name="ActivityTab" component={ActivityScreen} options={{title: "Activity", headerStyle: {backgroundColor: "#0055DA", borderBottomWidth: 2, borderBlockColor: "grey"}}}/>
-      <Tab.Screen name="ProfileTab" component={ProfileScreen} options={{title: "Profile", headerStyle: {backgroundColor: "#0055DA", borderBottomWidth: 2, borderBlockColor: "grey"}}}/>
+      <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
+      <Tab.Screen name="Analytics" component={AnalyticsScreen} options={{headerShown: false}}/>
+      <Tab.Screen name="Activity" component={ActivityScreen} options={{headerShown: false}}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}}/>
     </Tab.Navigator>
   )
 }
