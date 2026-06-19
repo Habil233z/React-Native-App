@@ -1,15 +1,49 @@
-import { MaterialIcons } from "@expo/vector-icons"
-import { useContext } from "react"
-import { TouchableOpacity, View } from "react-native"
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons"
+import { useContext, useEffect, useState } from "react"
+import { TouchableOpacity, View, Text, Image } from "react-native"
 import { AuthContext } from "../../App"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { api, API_URL } from "../config/api"
+import * as SecureStore from "expo-secure-store"
 
 export default function ProfileScreen() {
     const {signOut} = useContext(AuthContext)
+    const [photo_profile, setPhoto_profile] = useState<string>("")
+    const [post, setPost] = useState([])
+
+    async function getProfile() {
+        try {
+            const token = await SecureStore.getItemAsync("userToken")
+            const response = await api.get("/getProfile", {headers: {Authorization: `Bearer ${token}`}})
+            const profileImage = response.data.data.profile.photo_profile.replace("http://localhost:3000/uploads/", API_URL+"uploads/")
+            setPhoto_profile(profileImage)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getProfile()
+    },[])
+
     return (
-        <View>
-            <TouchableOpacity onPress={signOut}>
-                <MaterialIcons name="logout" size={20} color={"red"} />
-            </TouchableOpacity>
-        </View>
+        <SafeAreaView className="flex-1">
+            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 border-b border-gray-500">
+                <FontAwesome name="user-circle" size={28}/>
+                <View>
+                    <Text className="font-bold text-4xl text-gray-800">Profile</Text>
+                </View>
+                <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
+                    <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
+                </View>
+            </View>
+
+
+            <View>
+                <TouchableOpacity onPress={signOut}>
+                    <MaterialIcons name="logout" size={30} color={"red"} className="ml-6"/>
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
     )
 }
