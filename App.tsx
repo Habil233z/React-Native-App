@@ -1,4 +1,8 @@
 import "./global.css"
+import { createContext, useState, useEffect, useMemo } from "react";
+import { ActivityIndicator, View } from "react-native";
+import * as SecureStore from "expo-secure-store"
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,7 +13,6 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AnalyticsScreen from "./src/screens/AnalyticsScreen";
 import ActivityScreen from "./src/screens/ActivityScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
-import { View } from "react-native";
 
 export type RootStackParamList = {
   LoginScreen: undefined
@@ -69,13 +72,48 @@ function BottomTabs() {
   )
 }
 
+export const AuthContext = createContext<any>(null)
+
+
 export default function App() {
+  const [userToken, setUserToken] = useState<string|null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        const token = await SecureStore.getItemAsync("userToken")
+        setUserToken(token)
+      } catch (error) {
+        console.log(error)
+      }
+      finally {
+        setIsLoading(false)
+      }
+    }}, [])
+    
+    const authContext = useMemo(() => ({
+      signIn: async(token: string) => {
+        await SecureStore.setItemAsync("userToken", token)
+        setUserToken(token)
+      },
+      signOut: async () => {
+        await SecureStore.deleteItemAsync("userToken")
+        setUserToken(null)
+      }
+    }), [])
+
   return (
+    <AuthContext.Provider value={authContext}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LoginScreen">
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="MainApp" component={BottomTabs} options={{headerShown: false}}/>
+      <Stack.Navigator>
+        {userToken == null ? (
+          <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
+        ): (
+          <Stack.Screen name="MainApp" component={BottomTabs} options={{headerShown: false}}/>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthContext.Provider>
   )
 }

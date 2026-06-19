@@ -1,23 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
-import { View, Text, Button, TextInput } from "react-native";
-import { setItem } from "../utils/AsyncStorage";
+import { useContext, useState } from "react";
+import { View, Text, Button, TextInput, Alert } from "react-native";
+import { api } from "../config/api";
+import * as SecureStore from "expo-secure-store"
+import { AuthContext } from "../../App";
 
 export default function LoginScreen({navigation}: any) {
     const [emailOrUsername, setEmailOrUsername] = useState("")
     const [password, setPassword] = useState("")
-    
-    const [wrong, setWrong] = useState(false)
+    const {signIn} = useContext(AuthContext)
 
-    async function handleClick(e: any) {
+    async function handleClick() {
+        if (!emailOrUsername || !password) {
+            Alert.alert("Must provide username/email and password")
+            return
+        }
         try {
-            const response = await axios.post("http://192.168.18.162:3000/login", {emailOrUsername, password})
-            setWrong(false)
-            const token = response.data.token
-            setItem("userToken", token)
-            navigation.navigate("MainApp")
+            const response = await api.post("/login", {emailOrUsername, password})
+            signIn(response.data.token)
         } catch (error) {
-            setWrong(true)
+            Alert.alert("Username/email or password are wrong")
             console.log(error)
         }
     }
@@ -38,7 +40,6 @@ export default function LoginScreen({navigation}: any) {
                 ></TextInput>
                 </View>
                 <Button title="Login" onPress={handleClick}/>
-                {wrong && <Text>Username or password are incorrect</Text>}
             </View>
         </View>
     )
