@@ -42,19 +42,19 @@ export default function ProfileScreen({navigation}: any) {
 
 
             <View className="h-full items-center">
-                <View className="w-[70%] bg-white flex flex-col items-center pb-10 pt-10 mt-20 rounded-xl">
-                    <View className="h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-800">
+                <View className="w-[70%] bg-white flex flex-col items-center pb-10 justify-center pt-10 mt-20 rounded-xl border border-gray-300 shadow-2xl">
+                    <View className="h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
                         <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
                     </View>
                     <Text className="mt-5 font-bold text-4xl">{profile.full_name}</Text>
                     <Text className="text-gray-600">@{profile.username}</Text>
                     <Text>{profile.bio}</Text>
-                    <Button title="Edit Profile" onPress={() => navigation.navigate("Edit")}/>
-                    <Button title="Setting"/>
-                    <Button title="Privacy"/>
+                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={() => navigation.navigate("Edit")}><Text>Edit Profile</Text></TouchableOpacity>
+                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5}><Text>Setting</Text></TouchableOpacity>
+                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5}><Text>Privacy</Text></TouchableOpacity>
 
-                    <View className="mt-5 ">
-                        <Button title="Logout" onPress={signOut}/>
+                    <View className="mt-20">
+                        <TouchableOpacity className="bg-red-800 mt-2 h-9 w-[120px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={signOut}><Text className="text-white">Log Out</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
