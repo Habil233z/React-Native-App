@@ -43,7 +43,7 @@ export default function ProfileScreen({navigation}: any) {
 
             <View className="h-full items-center">
                 <View className="w-[70%] bg-white flex flex-col items-center pb-10 justify-center pt-10 mt-20 rounded-xl border border-gray-300 shadow-2xl">
-                    <View className="h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-300">
+                    <View className="h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-800">
                         <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
                     </View>
                     <Text className="mt-5 font-bold text-4xl">{profile.full_name}</Text>
