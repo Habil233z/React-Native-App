@@ -4,24 +4,12 @@ import { useEffect, useState } from "react";
 import { api, API_URL } from "../config/api";
 import { SafeAreaView } from "react-native-safe-area-context"
 import { FontAwesome, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-
-interface Post {
-    id: number
-    content: string
-    image: string
-    created_at: string
-    creator_photo_profile: string
-    created_by: string
-    creator_id: number
-    updated_at: string
-    updated_by: string
-    likes: number
-}
+import { Post } from "../utils/types";
 
 export default function AnalyticsScreen() {
     const [photo_profile, setPhoto_profile] = useState<string>("")
     const [post, setPost] = useState<Post[]>([])
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState<boolean>(true)
 
     async function getProfile() {
         try {

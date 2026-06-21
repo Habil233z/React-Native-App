@@ -13,10 +13,12 @@ import HomeScreen from "./src/screens/HomeScreen";
 import AnalyticsScreen from "./src/screens/AnalyticsScreen";
 import ActivityScreen from "./src/screens/ActivityScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import EditScreen from "./src/screens/EditScreen"
 
 export type RootStackParamList = {
   LoginScreen: undefined
   MainApp: undefined
+  Edit: undefined
 }
 
 export type RootTabParamList = {
@@ -110,7 +112,10 @@ export default function App() {
         {userToken == null ? (
           <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
         ): (
+          <>
           <Stack.Screen name="MainApp" component={BottomTabs} options={{headerShown: false}}/>
+          <Stack.Screen name="Edit" component={EditScreen} options={{headerStyle: {backgroundColor: "#F5F5F5"}, title: "Edit Profile"}}/>
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

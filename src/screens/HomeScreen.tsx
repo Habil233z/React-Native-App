@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { api, API_URL } from "../config/api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
+import { User } from "../utils/types";
 
 export default function HomeScreen() {
-    const [profile, setProfile] = useState({} as any)
+    const [profile, setProfile] = useState<User>({} as User)
     const [photo_profile, setPhoto_profile] = useState<string>("")
     const [followers, setFollowers] = useState<number|null>(0)
     const [likes, setLikes] = useState<number>(0)

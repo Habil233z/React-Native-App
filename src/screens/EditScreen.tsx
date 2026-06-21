@@ -1,0 +1,61 @@
+import { View, Text, Image, TextInput, Button } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import * as SecureStore from "expo-secure-store"
+import { User } from "../utils/types";
+import { useContext, useEffect, useState } from "react";
+import { api, API_URL } from "../config/api";
+import { AuthContext } from "../../App";
+
+export default function EditScreen({navigation}: any) {
+    const [photo_profile, setPhoto_profile] = useState<string>("")
+    const [username, setUsername] = useState<string>("")
+    const [full_name, setFull_name] = useState<string>("")
+    const [bio, setBio] = useState<string>("")
+    const {signIn} = useContext(AuthContext)
+
+    async function getProfile() {
+        try {
+            const token = await SecureStore.getItemAsync("userToken")
+            const response = await api.get("/getProfile", {headers: {Authorization: `Bearer ${token}`}})
+            setUsername(response.data.data.profile.username)
+            setFull_name(response.data.data.profile.full_name)
+            setBio(response.data.data.profile.bio)
+            const profileImage = response.data.data.profile.photo_profile.replace("http://localhost:3000/uploads/", API_URL+"uploads/")
+            setPhoto_profile(profileImage)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleClick() {
+        try {
+            const token = await SecureStore.getItemAsync("userToken")
+            const response = await api.put("/editProfile", {username, full_name, bio}, {headers: {Authorization: `Bearer ${token}`}})
+            signIn(response.data.data.token)
+            navigation.navigate("MainApp")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
+    
+    return (
+        <SafeAreaView className="justify-center items-center bg-gray-100">
+            <View  className="bg-white w-[80%] items-center rounded-xl">
+                <Text className="font-bold text-4xl mt-6 text-blue-800">Edit Your Profile</Text>
+                <View className="h-[100px] w-[100px] rounded-full overflow-hidden border-2 border-gray-800">
+                    <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
+                </View>
+                <View className="w-[90%] py-4">
+                    <Text className="text-xl font-semibold">Username : </Text><TextInput onChangeText={setUsername} value={username} className="border p-0"></TextInput>
+                    <Text className="text-xl font-semibold">Full Name : </Text><TextInput onChangeText={setFull_name} value={full_name} className="border p-0"></TextInput>
+                    <Text className="text-xl font-semibold">Bio : </Text><TextInput onChangeText={setBio} value={bio} className="border p-0 mb-5"></TextInput>
+                    <Button title="Submit" onPress={handleClick}/>
+                </View>
+            </View>
+        </SafeAreaView>
+    )
+}

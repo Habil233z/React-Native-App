@@ -1,8 +1,6 @@
-import axios from "axios";
 import { useContext, useState } from "react";
 import { View, Text, Button, TextInput, Alert } from "react-native";
 import { api } from "../config/api";
-import * as SecureStore from "expo-secure-store"
 import { AuthContext } from "../../App";
 
 export default function LoginScreen({navigation}: any) {
@@ -25,8 +23,8 @@ export default function LoginScreen({navigation}: any) {
     }
 
     return (
-        <View style={{flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#EEEEEE"}}>
-            <View style={{backgroundColor: "white", flex: 1, justifyContent: "center", alignItems: "center", maxHeight: "150", paddingHorizontal: "20", borderRadius: "5%"}}>
+        <View className="flex-1 bg-gray-100 justify-center items-center">
+            <View className="flex-1 bg-white justify-center items-center m-h-150 px-5 rounded-xl">
                 <Text>Login to Socidata Analytics App</Text>
                 <View>
                 <TextInput
