@@ -9,6 +9,7 @@ import * as SecureStore from "expo-secure-store"
 export default function ProfileScreen() {
     const {signOut} = useContext(AuthContext)
     const [photo_profile, setPhoto_profile] = useState<string>("")
+    const [profile, setProfile] = useState({})
     const [post, setPost] = useState([])
 
     async function getProfile() {
@@ -17,6 +18,7 @@ export default function ProfileScreen() {
             const response = await api.get("/getProfile", {headers: {Authorization: `Bearer ${token}`}})
             const profileImage = response.data.data.profile.photo_profile.replace("http://localhost:3000/uploads/", API_URL+"uploads/")
             setPhoto_profile(profileImage)
+            setProfile(response.data.data.profile)
         } catch (error) {
             console.log(error)
         }
@@ -39,10 +41,13 @@ export default function ProfileScreen() {
             </View>
 
 
-            <View>
-                <TouchableOpacity onPress={signOut}>
-                    <MaterialIcons name="logout" size={30} color={"red"} className="ml-6"/>
-                </TouchableOpacity>
+            <View className="h-full items-center">
+                <View className="w-[70%] bg-white flex flex-col items-center pb-10 pt-10 mt-20">
+                    <View className="h-[96px] w-[96px] rounded-full overflow-hidden border-2 border-gray-800">
+                        <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
+                    </View>
+                    <Text className="mt-5 font-bold text-4xl">{profile.username}</Text>
+                </View>
             </View>
         </SafeAreaView>
     )
