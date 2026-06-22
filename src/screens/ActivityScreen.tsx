@@ -62,6 +62,9 @@ export default function ActivityScreen() {
             {!loading &&
              <View className="items-center justify-center bg-gray-100 dark:bg-gray-950">
                 <View className="w-[70%] h-full">
+                    <View className="w-full items-center">
+                    <Text className="mt-4 text-2xl font-semibold dark:text-gray-200">Latest Followers:</Text>
+                    </View>
                 <FlatList
                 data={followers}
                 keyExtractor={(item: any) => item.id.toString()}
