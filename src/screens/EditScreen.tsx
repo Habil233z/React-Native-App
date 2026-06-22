@@ -5,6 +5,7 @@ import { User } from "../utils/types";
 import { useContext, useEffect, useState } from "react";
 import { api, API_URL } from "../config/api";
 import { AuthContext } from "../../App";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function EditScreen({navigation}: any) {
     const [photo_profile, setPhoto_profile] = useState<string>("")
@@ -46,6 +47,7 @@ export default function EditScreen({navigation}: any) {
     
     return (
         <SafeAreaView className="justify-center items-center bg-gray-100 dark:bg-gray-800 h-full w-full pb-20">
+            <View className="w-full flex-row"><TouchableOpacity onPress={() => navigation.navigate("MainApp")}><Ionicons name="arrow-back" size={28} color={"white"} className="ml-6 mb-20"/></TouchableOpacity></View>
             <View  className="bg-white w-[80%] items-center rounded-xl border border-gray-300 dark:bg-gray-700 dark:border-gray-900">
                 <Text className="font-bold text-4xl mt-6 text-blue-700">Edit Your Profile</Text>
                 <View className="h-[100px] w-[100px] rounded-full overflow-hidden border-2 border-gray-800 dark:border-gray-400">

@@ -54,12 +54,12 @@ function BottomTabs() {
       )
       },
       tabBarStyle: {
-        backgroundColor: "#EEEEEE",
-        borderBlockColor: "gray",
+        backgroundColor: "#C5C7BC",
+        borderBlockColor: "black",
         borderTopWidth: 1
       },
       tabBarActiveTintColor: "#0055DA",
-      tabBarInactiveTintColor: "gray"
+      tabBarInactiveTintColor: "black"
     })}
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
@@ -110,7 +110,7 @@ export default function App() {
         ): (
           <>
           <Stack.Screen name="MainApp" component={BottomTabs} options={{headerShown: false}}/>
-          <Stack.Screen name="Edit" component={EditScreen} options={{headerStyle: {backgroundColor: "#F5F5F5"}, title: "Edit Profile"}}/>
+          <Stack.Screen name="Edit" component={EditScreen} options={{headerShown: false}}/>
           </>
         )}
       </Stack.Navigator>
