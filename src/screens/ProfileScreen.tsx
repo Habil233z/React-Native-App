@@ -47,7 +47,7 @@ export default function ProfileScreen({navigation}: any) {
     return (
         <SafeAreaView className="flex-1">
             <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-blue-950" : "bg-blue-700"} pb-2 pt-2`}>
-                <FontAwesome name="user-circle" size={28} color={"white"}/>
+                <FontAwesome name="user-circle" size={28} color={colorScheme === "dark" ? "white" : ""}/>
                 <View>
                     <Text className={`font-bold text-4xl ${currentTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}>Profile</Text>
                 </View>
