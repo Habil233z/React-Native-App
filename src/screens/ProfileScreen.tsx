@@ -1,4 +1,4 @@
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 import { useContext, useEffect, useState } from "react"
 import { TouchableOpacity, View, Text, Image, Button } from "react-native"
 import { AuthContext } from "../../App"
@@ -47,7 +47,7 @@ export default function ProfileScreen({navigation}: any) {
     return (
         <SafeAreaView className="flex-1">
             <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-blue-950" : "bg-blue-700"} pb-2 pt-2`}>
-                <FontAwesome name="user-circle" size={28} color={colorScheme === "dark" ? "white" : ""}/>
+                <Ionicons name="person-circle-outline" size={28} color={colorScheme === "dark" ? "white" : ""}/>
                 <View>
                     <Text className={`font-bold text-4xl ${currentTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}>Profile</Text>
                 </View>
@@ -69,7 +69,7 @@ export default function ProfileScreen({navigation}: any) {
                     <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5}><Text>Setting</Text></TouchableOpacity>
                     <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-10 w-[110px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}><Text>Change Theme</Text></TouchableOpacity>
                     <View className="mt-20">
-                        <TouchableOpacity className="bg-red-800 mt-2 h-10 w-[140px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={signOut}><Text className="text-white">Log Out</Text></TouchableOpacity>
+                        <TouchableOpacity className="bg-red-800 mt-2 h-10 w-[140px] justify-center items-center rounded-xl flex-row" activeOpacity={0.5} onPress={signOut}><Ionicons name="log-out-outline" size={20} className="mr-4" color={"white"}/><Text className="text-white">Log Out</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
