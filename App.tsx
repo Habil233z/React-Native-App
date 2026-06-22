@@ -36,24 +36,20 @@ function BottomTabs() {
     <Tab.Navigator
     screenOptions={({route}) => ({
       tabBarIcon: ({focused, color, size}) => {
-        let IoniconsIcon: keyof typeof Ionicons.glyphMap
-        let OcticonsIcon: keyof typeof Octicons.glyphMap 
-        let FontAwesomeIcon: keyof typeof FontAwesome.glyphMap
+        let IoniconsIcon: keyof typeof Ionicons.glyphMap = "home"
         if (route.name === "Home") {
           IoniconsIcon = focused? "home" : "home-outline"
         } else if (route.name === "Analytics") {
           IoniconsIcon = focused? "stats-chart" : "stats-chart-outline"
         } else if (route.name === "Activity") {
-          OcticonsIcon = focused ? "bell-fill" : "bell"
+          IoniconsIcon = focused ? "notifications" : "notifications-outline"
         } else if (route.name === "Profile") {
-          FontAwesomeIcon = focused ? "user-circle-o" : "user-circle"
+          IoniconsIcon = focused ? "person-circle" : "person-circle-outline"
         }
 
         return (
         <View style={{flex: 1, justifyContent: "center", flexDirection: "row"}}>
         <Ionicons name={IoniconsIcon} size={size} color={color} />
-        <Octicons name={OcticonsIcon} size={size} color={color} />
-        <FontAwesome name={FontAwesomeIcon} size={size} color={color} />
         </View>
       )
       },
