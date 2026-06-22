@@ -65,9 +65,9 @@ export default function ProfileScreen({navigation}: any) {
                     <Text className={`mt-5 font-bold text-4xl ${currentTheme === "dark" ? "text-gray-100" : ""}`}>{profile.full_name}</Text>
                     <Text className={`${currentTheme === "dark" ? "text-gray-300" : "text-gray-600"}`}>@{profile.username}</Text>
                     <Text className={`${currentTheme === "dark" ? "text-gray-100" : ""}`}>{profile.bio}</Text>
-                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={() => navigation.navigate("Edit")}><Text>Edit Profile</Text></TouchableOpacity>
-                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5}><Text>Setting</Text></TouchableOpacity>
-                    <TouchableOpacity className="bg-blue-700 dark:bg-gray-700 border border-gray-500 mt-2 h-10 w-[50px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}>{colorScheme === "dark" ? <Ionicons name="sunny-outline" size={20} color={"white"}/> : <Ionicons name="moon-outline" size={20} color={"white"}/>}</TouchableOpacity>
+                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 mb-10 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={() => navigation.navigate("Edit")}><Text>Edit Profile</Text></TouchableOpacity>
+                    
+                    <TouchableOpacity className="bg-blue-700 dark:bg-blue-800 border border-gray-500 mt-2 h-10 w-[50px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}>{colorScheme === "dark" ? <Ionicons name="sunny-outline" size={28} color={"white"}/> : <Ionicons name="moon-outline" size={20} color={"white"}/>}</TouchableOpacity>
                     <View className="mt-20">
                         <TouchableOpacity className="bg-red-800 mt-2 h-10 w-[140px] justify-center items-center rounded-xl flex-row" activeOpacity={0.5} onPress={signOut}><Ionicons name="log-out-outline" size={20} className="mr-4" color={"white"}/><Text className="text-white">Log Out</Text></TouchableOpacity>
                     </View>
