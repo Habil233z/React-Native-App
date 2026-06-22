@@ -45,11 +45,11 @@ export default function ProfileScreen({navigation}: any) {
     },[])
 
     return (
-        <SafeAreaView className="flex-1">
-            <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-blue-950" : "bg-blue-700"} pb-2 pt-2`}>
-                <Ionicons name="person-circle-outline" size={28} color={colorScheme === "dark" ? "white" : ""}/>
+        <SafeAreaView className="flex-1 dark:bg-blue-900">
+            <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-blue-900" : "bg-blue-700"} pb-2 pt-2`}>
+                <Ionicons name="person-circle-outline" size={36} color={"white"}/>
                 <View>
-                    <Text className={`font-bold text-4xl ${currentTheme === "dark" ? "text-gray-200" : "text-gray-800"}`}>Profile</Text>
+                    <Text className={`font-bold text-4xl text-gray-100`}>Profile</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
@@ -57,8 +57,8 @@ export default function ProfileScreen({navigation}: any) {
             </View>
 
 
-            <View className={`h-full w-full items-center ${currentTheme === "dark" ? "bg-gray-950": "bg-gray-100"}`}>
-                <View className={`w-[70%] flex flex-col items-center pb-10 justify-center pt-10 mt-20 rounded-xl border shadow-2xl ${currentTheme === "dark" ? "bg-gray-800 border-gray-900" : "bg-white border-gray-300"}`}>
+            <View className={`h-full w-full items-center ${currentTheme === "dark" ? "bg-gray-800": "bg-gray-100"}`}>
+                <View className={`w-[70%] flex flex-col items-center pb-10 justify-center pt-10 mt-20 rounded-xl border shadow-2xl ${currentTheme === "dark" ? "bg-gray-700 border-gray-900" : "bg-white border-gray-300"}`}>
                     <View className={`h-[96px] w-[96px] rounded-full overflow-hidden border-2 ${currentTheme === "dark" ? "border-gray-200" : "border-gray-800"}`}>
                         {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                     </View>

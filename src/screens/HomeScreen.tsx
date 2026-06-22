@@ -16,7 +16,7 @@ export default function HomeScreen() {
     const [reply, setReply] = useState<number>(0)
     const [loading, setLoading] = useState<boolean>(true)
 
-    const {colorScheme} = useColorScheme()
+    const {colorScheme, setColorScheme} = useColorScheme()
 
     async function getProfile() {
         try {
@@ -47,23 +47,26 @@ export default function HomeScreen() {
     useEffect(() => {
         getProfile()
         getData()
+        setColorScheme(colorScheme as any)
     },[])
 
     return (
-        <SafeAreaView className="flex-1">
-            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-950">
+        <SafeAreaView className="flex-1 dark:bg-blue-900">
+            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-900">
                 <View>
-                    <Text className="font-bold text-4xl text-gray-800 dark:text-gray-100">Hello @{profile.username}</Text>
-                    <Text className="dark:text-gray-200">Below is your performace</Text>
+                    <Text className="font-bold text-4xl text-gray-100">Hello @{profile.username}</Text>
+                    <Text className="text-gray-200">Below is your performace</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                 </View>
             </View>
 
- 
-            <View className="flex-row justify-between flex-wrap px-4 w-full h-full bg-gray-100 dark:bg-gray-950">
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-5 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
+
+            <View className="w-full h-full bg-gray-100 dark:bg-gray-800 justify-center items-center">
+
+            <View className="flex-row justify-between flex-wrap px-4 w-full">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-700">
                     <View className="flex-row justify-between items-start mb-4">
                         <MaterialIcons name="people-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
@@ -71,7 +74,7 @@ export default function HomeScreen() {
                     <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Folowers</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-5 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-700">
                     <View className="flex-row justify-between items-start mb-4">
                         <MaterialIcons name="favorite-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
@@ -79,7 +82,7 @@ export default function HomeScreen() {
                     <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Likes</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-700">
                     <View className="flex-row justify-between items-start mb-4">
                         <MaterialIcons name="chat-bubble-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
@@ -87,13 +90,14 @@ export default function HomeScreen() {
                     <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Post</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-700">
                     <View className="flex-row justify-between items-start mb-4">
                         <MaterialIcons name="reply" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
                     <Text className="text-[28px] font-bold text-gray-900 mb-1 dark:text-white">{reply}</Text>
                     <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Reply</Text>
                 </View>
+            </View>
             </View>
         </SafeAreaView>
     )

@@ -1,12 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View, Text, TextInput, Alert, TouchableOpacity } from "react-native";
 import { api } from "../config/api";
 import { AuthContext } from "../../App";
+import { useColorScheme } from "nativewind";
 
 export default function LoginScreen({navigation}: any) {
     const [emailOrUsername, setEmailOrUsername] = useState("")
     const [password, setPassword] = useState("")
     const {signIn} = useContext(AuthContext)
+
+    const {colorScheme, setColorScheme} = useColorScheme()
 
     async function handleClick() {
         if (!emailOrUsername || !password) {
@@ -22,10 +25,15 @@ export default function LoginScreen({navigation}: any) {
         }
     }
 
+    useEffect(() => {
+
+        setColorScheme(colorScheme as any)
+    })
+
     return (
-        <View className="flex-1 bg-gray-100 justify-center items-center dark:bg-gray-950">
-            <View className="bg-white justify-center items-center m-h-150 px-5 rounded-xl border border-gray-300 pb-4 shadow-2xl dark:bg-gray-800 dark:border-gray-900">
-                <Text className="font-bold text-blue-700 text-6xl mt-4 dark:text-blue-800">SociNet</Text>
+        <View className="flex-1 bg-gray-100 justify-center items-center dark:bg-gray-800">
+            <View className="bg-white justify-center items-center m-h-150 px-5 rounded-xl border border-gray-300 pb-4 shadow-2xl dark:bg-gray-700 dark:border-gray-900">
+                <Text className="font-bold text-blue-700 text-6xl mt-4 dark:text-blue-700">SociNet</Text>
                 <Text className="mt-2 font-semibold text-xl dark:text-gray-300">Login to SociNet Data Analytics App</Text>
                     <View className="w-[70%] items-start mt-2 mb-4">
                         <View className="flex-row border border-gray-400 bg-gray-200 h-8 mb-2"><TextInput className="p-0 w-full h-full pl-2" placeholder="Email or Username" onChangeText={setEmailOrUsername}/></View>
