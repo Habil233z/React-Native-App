@@ -67,7 +67,7 @@ export default function ProfileScreen({navigation}: any) {
                     <Text className={`${currentTheme === "dark" ? "text-gray-100" : ""}`}>{profile.bio}</Text>
                     <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={() => navigation.navigate("Edit")}><Text>Edit Profile</Text></TouchableOpacity>
                     <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5}><Text>Setting</Text></TouchableOpacity>
-                    <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 h-10 w-[110px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}><Text>Change Theme</Text></TouchableOpacity>
+                    <TouchableOpacity className="bg-blue-700 dark:bg-gray-700 border border-gray-500 mt-2 h-10 w-[50px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}>{colorScheme === "dark" ? <Ionicons name="sunny-outline" size={20} color={"white"}/> : <Ionicons name="moon-outline" size={20} color={"white"}/>}</TouchableOpacity>
                     <View className="mt-20">
                         <TouchableOpacity className="bg-red-800 mt-2 h-10 w-[140px] justify-center items-center rounded-xl flex-row" activeOpacity={0.5} onPress={signOut}><Ionicons name="log-out-outline" size={20} className="mr-4" color={"white"}/><Text className="text-white">Log Out</Text></TouchableOpacity>
                     </View>
