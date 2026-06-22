@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { View, Text, Button, TextInput, Alert, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Alert, TouchableOpacity } from "react-native";
 import { api } from "../config/api";
 import { AuthContext } from "../../App";
 
@@ -23,10 +23,10 @@ export default function LoginScreen({navigation}: any) {
     }
 
     return (
-        <View className="flex-1 bg-gray-100 justify-center items-center">
-            <View className="bg-white justify-center items-center m-h-150 px-5 rounded-xl border border-gray-300 pb-4 shadow-2xl">
-                <Text className="font-bold text-blue-700 text-6xl mt-4">SociNet</Text>
-                <Text className="mt-2 font-semibold text-xl">Login to SociNet Data Analytics App</Text>
+        <View className="flex-1 bg-gray-100 justify-center items-center dark:bg-gray-950">
+            <View className="bg-white justify-center items-center m-h-150 px-5 rounded-xl border border-gray-300 pb-4 shadow-2xl dark:bg-gray-800 dark:border-gray-900">
+                <Text className="font-bold text-blue-700 text-6xl mt-4 dark:text-blue-800">SociNet</Text>
+                <Text className="mt-2 font-semibold text-xl dark:text-gray-300">Login to SociNet Data Analytics App</Text>
                     <View className="w-[70%] items-start mt-2 mb-4">
                         <View className="flex-row border border-gray-400 bg-gray-200 h-8 mb-2"><TextInput className="p-0 w-full h-full pl-2" placeholder="Email or Username" onChangeText={setEmailOrUsername}/></View>
                         <View className="flex-row border border-gray-400 bg-gray-200 h-8"><TextInput className="p-0 w-full h-full pl-2" placeholder="Password" secureTextEntry={true} onChangeText={setPassword}/></View>

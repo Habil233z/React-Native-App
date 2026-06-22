@@ -5,6 +5,7 @@ import { api, API_URL } from "../config/api";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
 import { User } from "../utils/types";
+import { useColorScheme } from "nativewind";
 
 export default function HomeScreen() {
     const [profile, setProfile] = useState<User>({} as User)
@@ -13,6 +14,9 @@ export default function HomeScreen() {
     const [likes, setLikes] = useState<number>(0)
     const [post, setPost] = useState<number>(0)
     const [reply, setReply] = useState<number>(0)
+    const [loading, setLoading] = useState<boolean>(true)
+
+    const {colorScheme} = useColorScheme()
 
     async function getProfile() {
         try {
@@ -21,6 +25,7 @@ export default function HomeScreen() {
             setProfile(response.data.data.profile)
             const profileImage = response.data.data.profile.photo_profile.replace("http://localhost:3000/uploads/", API_URL+"uploads/")
             setPhoto_profile(profileImage)
+            setLoading(false)
         } catch (error) {
             console.log(error)
         }
@@ -46,48 +51,48 @@ export default function HomeScreen() {
 
     return (
         <SafeAreaView className="flex-1">
-            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 border-b border-gray-500">
+            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-950">
                 <View>
-                    <Text className="font-bold text-4xl text-gray-800">Hello @{profile.username}</Text>
-                    <Text>Below is your performace</Text>
+                    <Text className="font-bold text-4xl text-gray-800 dark:text-gray-100">Hello @{profile.username}</Text>
+                    <Text className="dark:text-gray-200">Below is your performace</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
-                    <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>
+                    {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                 </View>
             </View>
 
  
-            <View className="flex-row justify-between flex-wrap px-4 mt-4">
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 ">
+            <View className="flex-row justify-between flex-wrap px-4 w-full h-full bg-gray-100 dark:bg-gray-950">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-5 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
                     <View className="flex-row justify-between items-start mb-4">
-                        <MaterialIcons name="people-outline" size={24} color={"gray"}/>
+                        <MaterialIcons name="people-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
-                    <Text className="text-[28px] font-bold text-gray-900 mb-1">{followers}</Text>
-                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider">Folowers</Text>
+                    <Text className="text-[28px] font-bold text-gray-900 mb-1 dark:text-white">{followers}</Text>
+                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Folowers</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 ">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-5 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
                     <View className="flex-row justify-between items-start mb-4">
-                        <MaterialIcons name="favorite-outline" size={24} color={"gray"}/>
+                        <MaterialIcons name="favorite-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
-                    <Text className="text-[28px] font-bold text-gray-900 mb-1">{likes}</Text>
-                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider">Likes</Text>
+                    <Text className="text-[28px] font-bold text-gray-900 mb-1 dark:text-white">{likes}</Text>
+                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Likes</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 ">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
                     <View className="flex-row justify-between items-start mb-4">
-                        <MaterialIcons name="chat-bubble-outline" size={24} color={"gray"}/>
+                        <MaterialIcons name="chat-bubble-outline" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
-                    <Text className="text-[28px] font-bold text-gray-900 mb-1">{post}</Text>
-                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider">Post</Text>
+                    <Text className="text-[28px] font-bold text-gray-900 mb-1 dark:text-white">{post}</Text>
+                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Post</Text>
                 </View>
 
-                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 ">
+                <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-800">
                     <View className="flex-row justify-between items-start mb-4">
-                        <MaterialIcons name="reply" size={24} color={"gray"}/>
+                        <MaterialIcons name="reply" size={24} color={colorScheme === "dark" ? "white" : "gray"}/>
                     </View>
-                    <Text className="text-[28px] font-bold text-gray-900 mb-1">{reply}</Text>
-                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider">Reply</Text>
+                    <Text className="text-[28px] font-bold text-gray-900 mb-1 dark:text-white">{reply}</Text>
+                    <Text className="text-[12px] font-bold text-gray-700 uppercase tracking-wider dark:text-gray-100">Reply</Text>
                 </View>
             </View>
         </SafeAreaView>
