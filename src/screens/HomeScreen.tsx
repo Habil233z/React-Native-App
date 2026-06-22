@@ -51,19 +51,20 @@ export default function HomeScreen() {
     },[])
 
     return (
-        <SafeAreaView className="flex-1 dark:bg-blue-900">
-            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-900">
+        <SafeAreaView className="flex-1 dark:bg-gray-800 bg-gray-100">
+            <View className="flex-row justify-between items-center px-4 bg-gray-100 pb-2 pt-2 dark:bg-gray-800">
                 <View>
-                    <Text className="font-bold text-4xl text-gray-100">Hello @{profile.username}</Text>
-                    <Text className="text-gray-200">Below is your performace</Text>
+                    <Text className="font-bold text-4xl text-gray-800 dark:text-gray-100">Hello @{profile.username}</Text>
+                    <Text className="text-gray-700 dark:text-gray-300">Below is your performace in:</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                 </View>
             </View>
-
-
-            <View className="w-full h-full bg-gray-100 dark:bg-gray-800 justify-center items-center">
+            <View className="w-full items-center mt-10">
+            <Text className="text-blue-700 text-8xl font-bold">SociNet</Text>
+            </View>
+            <View className="w-full h-full bg-gray-100 dark:bg-gray-800 mt-20">
 
             <View className="flex-row justify-between flex-wrap px-4 w-full">
                 <View className="bg-white rounded-2xl p-4 shadow-xl w-[48%] mb-4 mt-4 border border-gray-200 dark:border-gray-900 dark:bg-gray-700">

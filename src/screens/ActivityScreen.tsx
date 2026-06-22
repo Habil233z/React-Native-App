@@ -43,11 +43,11 @@ export default function ActivityScreen() {
     },[])
 
     return (
-        <SafeAreaView className="flex-1 dark:bg-blue-900">
-            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-900">
-                <Octicons name="bell" size={28} color={"white"}/>
+        <SafeAreaView className="flex-1 dark:bg-gray-800 bg-gray-100">
+            <View className="flex-row justify-between items-center px-4 bg-gray-100 pb-2 pt-2 dark:bg-gray-800">
+                <Octicons name="bell" size={28} color={colorScheme === "dark" ? "white" : "black"}/>
                 <View>
-                    <Text className="font-bold text-4xl text-gray-100">Activity</Text>
+                    <Text className="font-bold text-4xl dark:text-gray-100 text-gray-800">Activity</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}

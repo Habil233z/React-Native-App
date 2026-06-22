@@ -46,11 +46,11 @@ export default function AnalyticsScreen() {
     },[])
 
     return (
-        <SafeAreaView className="flex-1 dark:bg-blue-900">
-            <View className="flex-row justify-between items-center px-4 bg-blue-700 pb-2 pt-2 dark:bg-blue-900">
-                <Ionicons name="analytics-outline" size={28} color={"white"}/>
+        <SafeAreaView className="flex-1 dark:bg-gray-800">
+            <View className="flex-row justify-between items-center px-4 bg-gray-100 pb-2 pt-2 dark:bg-gray-800">
+                <Ionicons name="analytics-outline" size={28} color={colorScheme === "dark" ? "white" : "black"}/>
                 <View>
-                    <Text className="font-bold text-2xl text-gray-100">Top Peforming Threads</Text>
+                    <Text className="font-bold text-2xl text-gray-800 dark:text-gray-100">Top Peforming Threads</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}

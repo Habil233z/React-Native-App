@@ -45,20 +45,23 @@ export default function ProfileScreen({navigation}: any) {
     },[])
 
     return (
-        <SafeAreaView className="flex-1 dark:bg-blue-900">
-            <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-blue-900" : "bg-blue-700"} pb-2 pt-2`}>
-                <Ionicons name="person-circle-outline" size={36} color={"white"}/>
+        <SafeAreaView className="flex-1 dark:bg-gray-800 bg-gray-100">
+            <View className={`flex-row justify-between items-center px-4 ${currentTheme === "dark" ? "bg-gray-800" : "bg-gray-100"} pb-2 pt-2`}>
+                <Ionicons name="person-circle-outline" size={36} color={colorScheme === "dark" ? "white" : "black"}/>
                 <View>
-                    <Text className={`font-bold text-4xl text-gray-100`}>Profile</Text>
+                    <Text className={`font-bold text-4xl dark:text-gray-100 text-gray-800`}>Profile</Text>
                 </View>
                 <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800">
                     {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                 </View>
             </View>
 
+            <View className="w-full items-center">
+                <Text className="text-blue-700 font-bold text-5xl">SociNet Account</Text>
+            </View>
 
             <View className={`h-full w-full items-center ${currentTheme === "dark" ? "bg-gray-800": "bg-gray-100"}`}>
-                <View className={`w-[70%] flex flex-col items-center pb-10 justify-center pt-10 mt-20 rounded-xl border shadow-2xl ${currentTheme === "dark" ? "bg-gray-700 border-gray-900" : "bg-white border-gray-300"}`}>
+                <View className={`w-[70%] flex flex-col items-center pb-10 justify-center pt-10 mt-10 rounded-xl border shadow-2xl ${currentTheme === "dark" ? "bg-gray-700 border-gray-900" : "bg-white border-gray-300"}`}>
                     <View className={`h-[96px] w-[96px] rounded-full overflow-hidden border-2 ${currentTheme === "dark" ? "border-gray-200" : "border-gray-800"}`}>
                         {!loading && <Image source={{uri: photo_profile}} className="w-full h-full" resizeMode="cover"></Image>}
                     </View>
@@ -67,7 +70,7 @@ export default function ProfileScreen({navigation}: any) {
                     <Text className={`${currentTheme === "dark" ? "text-gray-100" : ""}`}>{profile.bio}</Text>
                     <TouchableOpacity className="bg-gray-200 border border-gray-500 mt-2 mb-10 h-8 w-[90px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={() => navigation.navigate("Edit")}><Text>Edit Profile</Text></TouchableOpacity>
                     
-                    <TouchableOpacity className="bg-blue-700 dark:bg-blue-800 border border-gray-500 mt-2 h-10 w-[50px] justify-center items-center rounded-xl" activeOpacity={0.5} onPress={toggleTheme}>{colorScheme === "dark" ? <Ionicons name="sunny-outline" size={28} color={"white"}/> : <Ionicons name="moon-outline" size={20} color={"white"}/>}</TouchableOpacity>
+                    <TouchableOpacity className="bg-blue-800 dark:bg-gray-700 mt-2 h-[50px] w-[50px] justify-center items-center rounded-full" activeOpacity={0.5} onPress={toggleTheme}>{colorScheme === "dark" ? <Ionicons name="sunny-outline" size={40} color={colorScheme === "dark" ? "white" : "black"}/> : <Ionicons name="moon-outline" size={20} color={"white"}/>}</TouchableOpacity>
                     <View className="mt-20">
                         <TouchableOpacity className="bg-red-800 mt-2 h-10 w-[140px] justify-center items-center rounded-xl flex-row" activeOpacity={0.5} onPress={signOut}><Ionicons name="log-out-outline" size={20} className="mr-4" color={"white"}/><Text className="text-white">Log Out</Text></TouchableOpacity>
                     </View>
