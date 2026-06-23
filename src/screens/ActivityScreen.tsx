@@ -1,5 +1,5 @@
 import { Octicons } from "@expo/vector-icons"
-import { View, Text, Image, FlatList } from "react-native"
+import { View, Text, Image, FlatList, SectionList } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import * as SecureStore from "expo-secure-store"
 import { useState, useEffect } from "react"
@@ -12,6 +12,13 @@ export default function ActivityScreen() {
     const [liker, setLiker] = useState([])
     const [replier, setReplier] = useState([])
     const [loading, setLoading] = useState<boolean>(true)
+    const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
+
+    function handleRefresh() {
+        setIsRefreshing(true)
+        getLatestFollower()
+        setIsRefreshing(false)
+    }
 
     const {colorScheme} = useColorScheme()
 
@@ -66,11 +73,13 @@ export default function ActivityScreen() {
             {!loading &&
             <>
              <View className="items-center justify-center bg-gray-100 dark:bg-gray-800">
-                <View className="w-[90%] h-full">
+                <View className="w-[79%] h-full">
                     <View className="w-full items-center">
                     <Text className="mt-4 text-2xl font-semibold dark:text-gray-200">Latest Followers:</Text>
                     </View>
                 <FlatList
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
                 data={followers}
                 keyExtractor={(item: any) => item.id.toString()}
                 renderItem={({item}: any) => (

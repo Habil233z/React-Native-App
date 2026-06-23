@@ -11,6 +11,13 @@ export default function AnalyticsScreen() {
     const [photo_profile, setPhoto_profile] = useState<string>("")
     const [post, setPost] = useState<Post[]>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
+
+    function handleRefresh() {
+        setIsRefreshing(true)
+        getTopPost()
+        setIsRefreshing(false)
+    }
 
     const {colorScheme} = useColorScheme()
 
@@ -66,6 +73,8 @@ export default function AnalyticsScreen() {
             <View className="items-center justify-center bg-gray-100 dark:bg-gray-800">
                 <View className="w-[90%] h-full">
                 <FlatList
+                refreshing={isRefreshing}
+                onRefresh={handleRefresh}
                 data={post}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}: any) => (
