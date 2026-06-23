@@ -9,6 +9,8 @@ import { useColorScheme } from "nativewind"
 export default function ActivityScreen() {
     const [photo_profile, setPhoto_profile] = useState<string>("")
     const [followers, setFollowers] = useState([])
+    const [liker, setLiker] = useState([])
+    const [replier, setReplier] = useState([])
     const [loading, setLoading] = useState<boolean>(true)
 
     const {colorScheme} = useColorScheme()
@@ -30,6 +32,8 @@ export default function ActivityScreen() {
             const token = await SecureStore.getItemAsync("userToken")
             const response = await api.get("/mobile/latestActivities", {headers: {Authorization: `Bearer ${token}`}})
             setFollowers(response.data.data.latestFollowers)
+            setLiker(response.data.data.finalizedLikes)
+            setLiker(response.data.data.finalizedReplies)
             setLoading(false)
             return
         } catch (error) {
@@ -62,7 +66,7 @@ export default function ActivityScreen() {
             {!loading &&
             <>
              <View className="items-center justify-center bg-gray-100 dark:bg-gray-800">
-                <View className="w-[70%] h-full">
+                <View className="w-[90%] h-full">
                     <View className="w-full items-center">
                     <Text className="mt-4 text-2xl font-semibold dark:text-gray-200">Latest Followers:</Text>
                     </View>
@@ -90,29 +94,6 @@ export default function ActivityScreen() {
                 )}></FlatList>
                 </View>
             </View>
-
-            <FlatList
-                data={followers}
-                keyExtractor={(item: any) => item.id.toString()}
-                renderItem={({item}: any) => (
-                    <View className="flex flex-row mt-4 w-full bg-white p-4 border border-gray-400 rounded-2xl dark:border-gray-900 dark:bg-gray-800">
-                        <View className="h-[48px] w-[48px] rounded-full overflow-hidden border-2 border-gray-800 dark:border-gray-500">
-                            <Image className="w-full h-full" resizeMode="cover" source={{uri: item.follower.photo_profile.replace("http://localhost:3000/uploads/", API_URL+"uploads/")}}/>
-                        </View>
-                        <View className="w-[80%] pb-15">
-                            <View className="ml-2">
-
-                                <Text className="font-bold text-2xl dark:text-gray-200">{item.follower.username}</Text>
-                                <View>
-                                    <Text className="dark:text-gray-200">Has follow you at: {item.create_at}</Text>
-                                </View>
-                                <View className="flex flex-row-reverse w-full mt-2 justify-between">
-                                </View>
-                            </View>
-                        </View>
-                            
-                    </View>
-            )}></FlatList>
             </>
             }
         </SafeAreaView>

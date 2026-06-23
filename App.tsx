@@ -2,8 +2,9 @@ import "./global.css"
 import { createContext, useState, useEffect, useMemo } from "react";
 import { ActivityIndicator, View } from "react-native";
 import * as SecureStore from "expo-secure-store"
+import { useColorScheme } from "nativewind";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, NavigationContainer, useTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, Octicons, FontAwesome } from "@expo/vector-icons";
@@ -53,13 +54,6 @@ function BottomTabs() {
         </View>
       )
       },
-      tabBarStyle: {
-        backgroundColor: "#C5C7BC",
-        borderBlockColor: "black",
-        borderTopWidth: 1
-      },
-      tabBarActiveTintColor: "#0055DA",
-      tabBarInactiveTintColor: "black"
     })}
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
@@ -77,7 +71,10 @@ export default function App() {
   const [userToken, setUserToken] = useState<string|null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+  const {colorScheme, setColorScheme} = useColorScheme()
+
   useEffect(() => {
+    setColorScheme(colorScheme as any)
     const checkToken = async () => {
       try {
         const token = await SecureStore.getItemAsync("userToken")
@@ -103,7 +100,8 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={authContext}>
-    <NavigationContainer>
+    <View style={{ flex: 1 }} className="bg-gray-300 dark:bg-gray-800">
+    <NavigationContainer theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
         {userToken == null ? (
           <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
@@ -115,6 +113,7 @@ export default function App() {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </View>
     </AuthContext.Provider>
   )
 }
