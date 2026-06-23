@@ -62,7 +62,7 @@ export default function HomeScreen() {
                 </View>
             </View>
             <View className="w-full items-center mt-10">
-            <Text className="text-blue-700 text-8xl">SociNet</Text>
+            <Text className="text-blue-700 text-8xl font-bold">SociNet</Text>
             </View>
             <View className="w-full h-full bg-gray-100 dark:bg-gray-800 mt-20">
 
